@@ -1,0 +1,26 @@
+
+.hot-recommend-box{
+	-ms-touch-action: none;
+	    touch-action: none;
+	height: 350rpx;
+	background-color: #FFFFFF;
+	margin-bottom: 20rpx;
+	padding: 20rpx 0;
+}
+.hot-recommend-title{
+	font-size: 32rpx;
+	padding: 0 30rpx;
+	font-weight: 600;
+}
+.hot-recommend-swiper{
+	margin-top: 10rpx;
+	padding-left: 34rpx;
+	height: 240rpx;
+}
+.hot-recommend-item{
+}
+.hot-recommend-img{
+	width: 175rpx;
+	height: 240rpx;
+}
+

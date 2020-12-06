@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/more/more",
+    "pages/myself/myself",
+    "pages/trends/home",
+    "pages/index/search",
+    "pages/index/searchResult",
+    "pages/person/person",
+    "pages/more/tabbar-3-detial/tabbar-3-release/tabbar-3-release",
+    "pages/more/tabbar-3-detial/tabbar-3-video/tabbar-3-video",
+    "pages/more/tabbar-3-detial/tabbar-3-qa/tabbar-3-qa",
+    "pages/shop/home",
+    "pages/shop/product/product",
+    "pages/shop/order/createOrder",
+    "pages/shop/money/pay",
+    "pages/shop/money/paySuccess",
+    "pages/shop/category/category",
+    "pages/shop/product/list",
+    "pages/shop/cart/cart",
+    "pages/shop/address/address",
+    "pages/shop/address/addressManage",
+    "pages/shop/user/user"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#000",
+    "color": "#969696",
+    "selectedColor": "#79F3FE",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/Tabbar/index.png",
+        "selectedIconPath": "static/Tabbar/indexfill.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/trends/home",
+        "iconPath": "static/Tabbar/trends.png",
+        "selectedIconPath": "static/Tabbar/trendfill.png",
+        "text": "动态"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "static/Tabbar/publish.png"
+      },
+      {
+        "pagePath": "pages/shop/home",
+        "iconPath": "static/Tabbar/shop.png",
+        "selectedIconPath": "static/Tabbar/shopfill.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "iconPath": "static/Tabbar/myself.png",
+        "selectedIconPath": "static/Tabbar/myselffill.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "trend-scroll-view": "/pages/components/trendScrollView",
+    "hot": "/pages/components/hot",
+    "hot-new-card": "/pages/components/hotNewCard",
+    "rec-swiper": "/pages/components/recommedSwiper",
+    "hot-video": "/pages/components/hotVideo",
+    "search-result": "/pages/index/searchResult",
+    "tag": "/pages/components/Tag"
+  }
+}

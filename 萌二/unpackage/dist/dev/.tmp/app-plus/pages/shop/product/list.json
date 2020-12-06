@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "default",
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "商品列表",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "backgroundColor": "#f8f8f8",
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}

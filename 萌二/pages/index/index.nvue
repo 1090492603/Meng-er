@@ -1,0 +1,610 @@
+<template>
+	<div class="page" :style="{ height: height }">
+		<div class="sNav">
+			<div class="NavsItem">
+				<image :src="avater" mode="aspectFill" class="avater imgH" @click.stop="tapAvater"></image>
+			</div>
+			<div class="focusAndRec">
+				<text class="recommend" :class="IsChoose=='recommend'? 'onclick':''" @click="onClick" data-cur="recommend">推荐</text>
+				<text class="focus" :class="IsChoose=='focus'? 'onclick':''" @click="onClick" data-cur="focus">关注</text>
+			</div>
+			<div class="search">
+				<image src="../../static/search.png" class="searchI" @click="goToSearch"></image>
+			</div>
+		</div>
+		<div class="swiper" ref="swiper">
+			<cover-view class="cover-view-center">
+				<div :style="{ height: coverHeight,width: width }" @click="clickVideo"
+					@touchmove="ListTouchMove" @touchend="ListTouchEnd"
+					@touchstart="ListTouchStart">
+					<cover-view class="cover-view-right">
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/fenxiang.png" class="img" @click.stop="tapShare"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/collect.png" class="img"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image :src="check?'../../static/indexIco/Lovefill.png':'../../static/indexIco/Love.png'" class="img" @click.prevent="tapLove"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/pinglun.png" class="img" @click.stop="tapMsg"></cover-image><text class="avaterText">12</text></cover-view>
+					</cover-view>
+					<cover-view class="cover-view-shop" :style="{bottom:220+ parseInt(Item.content.length/17)*40+'upx'}">
+						<div class="shopInfo" @click="goShop">
+							<image src="../../static/logo.png" class="shopIco"></image>
+							<text class="shopName">妹妹抱枕 :</text><text class="shopPrice">￥12.5</text>
+						</div>
+					</cover-view>
+					<cover-view class="cover-view-left">
+						<!-- #ifdef APP-PLUS-NVUE-->
+						<text class="left-text aa">@国欠妹妹</text>
+						<text class="left-text">{{Item.content}}</text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE-->
+						{{Item.content}}
+						<!-- #endif -->
+					</cover-view>
+				</div>
+			</cover-view>
+			<block v-for="(item, idx) in videoList" :key="idx">
+				<div class="video-box" :style="{ height: height }">
+					<chunlei-video class="video" :src="item.src"  :height="height" :width="width" 
+						:play="item.flag" v-if="Math.abs(index-idx)<=1"
+						:initialTime="item.initialTime" @pause="pauseVideo" :short="item.short"
+					>
+					</chunlei-video>
+					<cover-view v-if="item.captionsList" class="captions" :style="{bottom:320+ parseInt(item.content.length/17)*40+'upx'}">
+						<div class="captionsList" style="">
+							<div class="captionsBox" :ref="'itemAc'+ idx">
+								<div v-for="(aItem,aIndex) in item.captionsList" :key="aIndex">
+									<text class="captions-text" :class="top/19==(-aIndex+1)?'showText':''" :ref="'item'+index+'aText'+aIndex">{{aItem.captions}}</text>
+								</div>
+							</div>
+						</div>
+					</cover-view>
+					<cover-view class="cover-view-shop" :style="{bottom:220+ parseInt(item.content.length/17)*40+'upx'}">
+						<div class="shopInfo" @click="goShop()">
+							<image src="../../static/1.jpg" mode="aspectFill" class="shopIco"></image>
+							<text class="shopName">妹妹抱枕 :</text><text class="shopPrice">￥12.5</text>
+						</div>
+					</cover-view>
+					<cover-view class="cover-view-left">
+						<!-- #ifdef APP-PLUS-NVUE-->
+						<text class="left-text">@国欠妹</text>
+						<text class="left-text">{{item.content}}</text>
+						<!-- #endif -->
+						<!-- #ifndef APP-PLUS-NVUE-->
+						{{item.content}}
+						<!-- #endif -->
+					</cover-view>
+					<cover-view class="cover-view-right">
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/fenxiang.png" class="img"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/collect.png" class="img"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image :src="item.check?'../../static/indexIco/Lovefill.png':'../../static/indexIco/Love.png'" class="img"></cover-image><text class="avaterText">12</text></cover-view>
+						<cover-view class="coverView"><cover-image src="../../static/indexIco/pinglun.png" class="img"></cover-image><text class="avaterText">12</text></cover-view>
+					</cover-view>
+				</div>
+				
+			</block>
+		</div>
+	
+	</div>
+</template>
+
+<script>
+	import chunleiVideo from '../../components/chunlei-video/chunlei-video.vue'
+	const animation = weex.requireModule('animation')
+	const modal = weex.requireModule('modal')
+	export default { 
+		components:{
+			chunleiVideo
+		},
+		data(){
+			return{
+				isTouch: true,
+				Item:{},
+				check: false,
+				avater:'',
+				IsChoose: "recommend",
+				stopAva:'',
+				AvaTop:0,
+				height:'667px',
+				coverHeight: '500px',
+				index:0,
+				width:'',
+				sysheight:0,
+				containerStyle:'',
+				distance:0,
+				listTouchStartY: 0,
+				listTouchDirection: null,
+				scroll:false,
+				playCount:2,//剩余多少视频加载视频列表
+				videoList:[
+					{
+						src:'http://118.31.74.72/group1/M00/00/00/rBBOjF2getOAYZdoACOEog7m8MM075.mp4',
+						content:'这么萌的妹妹，是多少人的梦想',
+						flag:false,
+						check:false,
+						short: true,
+						avater:'../../static/1.jpg',
+						duration:842,
+						initialTime:0,
+						captionsList:[
+							{
+								captions: "哇哦，我也想要这样的妹妹"
+							},
+							{
+								captions: "教练，我也想要"
+							},
+							{
+								captions: "国家欠我一个这样的妹妹"
+							},
+							{
+								captions: "妹妹我的!!，其他随意"
+							},
+							{
+								captions: "我能当她的哥哥吗"
+							},
+							{
+								captions: "妹妹我的!!，其他随意"
+							},
+							{
+								captions: "国家欠我一个这样的妹妹"
+							}
+						]
+					},
+					{
+						src:'http://118.31.74.72/group1/M00/00/00/rBBOjF2euR-Adx9uAIaK2XPbpCw152.mp4',
+						content:'你的二次元虚拟少女偶像为你热舞',
+						flag:false,
+						check:true,
+						avater:'http://img.kaiyanapp.com/255365dbfc2622930eb0cdb33e43abf0.jpeg?imageMogr2/quality/60/format/jpg',
+						duration:200,
+						initialTime:0,
+						captionsList:[
+							{
+								captions: "萌二牛逼"
+							},
+							{
+								captions: "润钊喜欢吃肉"
+							},
+							{
+								captions: "软设第一！！"
+							},
+							{
+								captions: "好评走起！"
+							}
+						]
+					},
+					{
+						src:'http://118.31.74.72/group1/M00/00/00/rBBOjF2ge9uAAtCiADo7PT85dWk930.mp4',
+						content:'789',
+						flag:false,
+						check:false,
+						avater:'http://img.kaiyanapp.com/255365dbfc2622930eb0cdb33e43abf0.jpeg?imageMogr2/quality/60/format/jpg',
+						duration:191,
+						initialTime:0
+					},
+					{
+						src:'http://118.31.74.72/group1/M00/00/00/rBBOjF2gfCaAfKpcABOWDRRGTjY212.mp4',
+						content:'789',
+						flag:false,
+						check:false,
+						avater:'http://img.kaiyanapp.com/255365dbfc2622930eb0cdb33e43abf0.jpeg?imageMogr2/quality/60/format/jpg',
+						duration:191,
+						initialTime:0
+					},
+				]
+			}
+		},
+		created(){
+			//#ifdef APP-PLUS
+			plus.screen.lockOrientation("portrait-primary")
+			//#endif
+			this.sysheight = uni.getSystemInfoSync().windowHeight
+			this.height = `${this.sysheight}px` 
+			this.coverHeight =`${this.sysheight-75}px`
+			let width = uni.getSystemInfoSync().windowWidth 
+			this.width = `${width}px` 
+			this.avater = this.videoList[this.index].avater
+			this.Item = this.videoList[this.index]
+		},
+		onShow(){
+			uni.setTabBarStyle({
+				borderStyle: "white",
+				backgroundColor: "#000",
+				color: "#969696",
+				selectedColor: "#79F3FE"
+			})
+		},
+		async mounted() {
+			await this.pushVideoList()
+			this.videoPlay(this.index)
+			this.captionsPlay()
+		},
+		onHide(){
+			for (let item of this.videoList) {
+				item.flag = false
+			}
+		},
+		methods:{
+			pushVideoList(){
+				let promise = new Promise((resolve,reject)=>{
+					uni.request({
+						url: 'https://api.apiopen.top/videoRecommend?id=127397',
+						success: (res) => {
+							let videoGroup = []
+							let str = ""
+							for (let item of res.data.result) {
+								if(item.data.description && item.data.description.length>=85){
+									str = item.data.description.slice(item.data.description.length-85)
+									str = str.replace(/\s*/g,"")
+								} else {
+									str = item.data.description
+								}
+								if(item.type == 'videoSmallCard'){
+									videoGroup.push({
+										src:item.data.playUrl,
+										content:str,
+										flag:false,
+										check:false,
+										avater:item.data.author.icon,
+										initialTime:0,
+										short:true
+									})
+								}
+							}
+							this.videoList = [...this.videoList,...videoGroup]
+							resolve()
+						}
+					})
+				}) 
+				return promise
+			},
+			pauseVideo(val){
+				if(typeof this.videoList[this.index].initialTime !='undefined') this.videoList[this.index].initialTime = val
+			},
+			clickVideo(){
+				this.videoList[this.index].flag = !this.videoList[this.index].flag
+			},
+			// ListTouch触摸开始
+			ListTouchStart(e) {
+				if(this.isTouch)
+				{
+					this.listTouchStartY = e.changedTouches[0].pageY
+				}
+				
+			},
+			// ListTouch计算方向
+			ListTouchMove(e) {
+				if(this.isTouch){
+					//该视频向上
+					this.listTouchDirection = this.listTouchStartY - e.changedTouches[0].pageY > 10 ? -1 : 0
+					//该视频向下
+					this.listTouchDirection = e.changedTouches[0].pageY - this.listTouchStartY > 10 ?  1 : this.listTouchDirection
+					const distance = this.distance + e.changedTouches[0].pageY - this.listTouchStartY
+					if(distance>0) return
+					//判定为点击
+					if(Math.abs(this.listTouchStartY - e.changedTouches[0].pageY)<2){
+						this.listTouchDirection = null
+					}else{
+						var swiper = this.$refs.swiper;
+						animation.transition(swiper, {
+							styles: {
+								transform: `translate(0px, ${distance}px)`,
+							},
+								duration: 0, //ms
+								timingFunction: 'ease',
+								delay: 0 //ms
+							}, () => {
+						})
+					}
+				}
+				
+			},
+			// ListTouch计算滚动
+			async ListTouchEnd(e) {
+				if(this.isTouch){
+					if(this.scroll) return
+					//点击
+					if(!this.listTouchDirection){
+						
+						return
+					}
+					const destination = this.listTouchDirection*this.sysheight+this.distance
+					//不允许滚动出列表
+					if(destination>0||destination<-this.sysheight*(this.videoList.length-1)) return
+					
+					//开始滚动
+					await this.animate(destination, this.listTouchDirection)
+					for (let item of this.videoList) {
+						item.flag = false
+					}
+					this.index = this.index - this.listTouchDirection
+					this.videoList[this.index].flag = true
+					this.listTouchDirection = null
+					this.avater = this.videoList[this.index].avater
+					this.captionsPlay()
+					this.Item = this.videoList[this.index]
+					//加载视频
+					if(this.videoList.length - this.index - 1 <= this.playCount){
+						await this.pushVideoList()
+					}
+				}
+				
+			},
+			animate(des, direc) {
+				this.distance = des
+				let promise = new Promise((resolve,reject)=>{
+					this.scroll = true
+					var swiper = this.$refs.swiper;
+					this.isTouch = false
+					animation.transition(swiper, {
+						styles: {
+							transform: `translate(0px, ${this.distance}px)`,
+						},
+							duration: 300, //ms
+							timingFunction: 'ease-in-out',
+							delay: 0 //ms
+						}, () => {
+							this.isTouch = true
+							this.scroll = false
+							resolve()
+					})
+				})
+				return promise
+			},
+			videoPlay(index){
+				let promise = new Promise((resolve,reject)=>{
+					resolve()
+				})
+				promise.then(res=>{
+					this.videoList[index].flag = !this.videoList[index].flag
+				})
+			},
+			tapLove(){
+				this.videoList[this.index].check = !this.videoList[this.index].check
+				this.videoList[this.index].flag = !this.videoList[this.index].flag
+				console.log(this.index)
+				this.videoList = [...this.videoList]
+			},
+			tapAvater(){
+				uni.showToast({
+					icon:'none',
+					title:`点击索引为${this.index}的头像`
+				})
+				uni.navigateTo({
+					url: './../person/person'
+				});
+			},
+			tapMsg(){
+				uni.showToast({
+					icon:'none',
+					title:`查看索引为${this.index}的评论`
+				})
+				uni.getSubNVueById('drawer').show('slide-in-bottom', 200,()=>{});
+			},
+			tapShare(){
+				uni.showToast({
+					icon:'none',
+					title:`分享索引为${this.index}的视频`
+				})
+				uni.getSubNVueById('forward').show('slide-in-bottom', 200,()=>{});
+			},
+			onClick(e){
+				this.IsChoose = e.target.dataset.cur
+			},
+			goToSearch(){
+				uni.navigateTo({
+					url: './search?id=1'
+				});
+			},
+			captionsPlay(){
+				let _that = this
+				if(this.stopAva){
+					clearInterval(this.stopAva);
+				}
+				_that.top =19
+				if(_that.videoList[_that.index].captionsList){
+					var item = this.$refs['itemAc'+ this.index][0]
+					animation.transition(item, {
+					  styles: {
+						transform: "translateY("+_that.top+"px)"
+					  },
+					  duration: 500, //ms
+					  timingFunction: 'ease',
+					  //needLayout: true,
+					  delay: 0 //ms
+					}, function () {
+					})
+					this.stopAva = setInterval(()=>{
+						_that.$forceUpdate()
+						_that.top = _that.top - 19
+						animation.transition(item, {
+						  styles: {
+							transform: "translateY("+_that.top+"px)"
+						  },
+						  duration: 1000, //ms
+						  timingFunction: 'ease',
+						  //needLayout: true,
+						  delay: 0 //ms
+						}, function () {
+							if(_that.videoList[_that.index].captionsList.length&&_that.top==(-(_that.videoList[_that.index].captionsList.length-2)*19)){
+								_that.top = 38
+							}
+						})
+					},3000)
+				}
+			},
+			goShop(){
+				uni.navigateTo({
+					url:'../shop/product/product?id=2&name="妹妹抱枕"&price=12.5'
+				})
+			}
+		},
+		
+	}
+</script>
+
+<style>
+	.sNav{
+		position: fixed;
+		top: 0;
+		height: 75px;
+		width: 750upx;
+		padding: 15px 30upx 0px 30upx;
+		flex-direction: row;
+		justify-content: space-between;
+		z-index:99999;
+	}
+	.NavsItem{
+		flex: 1;
+	}
+	.search{
+		flex: 1;
+		margin-top: 37upx;
+		align-items: flex-end;
+	}
+	.imgH{
+		border-radius: 50%;
+		width: 80upx;
+		height: 80upx;
+	}
+	.recommend,.focus{
+		font-size: 18px;
+		height: 58upx;
+		color: #999;
+		text-align: center;
+	}
+	.searchI{
+		width: 70upx;
+		height: 70upx;
+	}
+	.onclick{
+		font-size: 19px;
+		color: white;
+		border-bottom-color: #FFF;
+		border-bottom-width: 2px;
+	}
+	.focusAndRec{
+		padding: 0 8px;
+		padding-top: 45upx;
+		justify-content: space-between;
+		flex-direction: row;
+		flex: 1;
+	}
+	.page{
+		overflow: hidden;
+		background-color: black;
+	}
+	.swiper{
+		position: relative;
+		background-color: #000;
+	}
+	.video-box{
+		
+		background-color: #000;
+	}
+	/* 这里就是蒙版 所有的事件都写在这个蒙版里面 去除opacity 加上个背景色就能发现秘密 */
+	.cover-view-center{
+		position: fixed;
+		bottom: 0;
+		justify-content: center;
+		align-items: center;
+		z-index: 999;
+		opacity: 0.1;
+	}
+	.avater{
+		margin-top: 35upx;
+		border-radius: 40upx;
+	}
+	.cover-view-left,.cover-view-shop,.captions{
+		position: absolute;
+		margin-left: 30upx;
+		padding: 2px 0;
+		z-index: 9999;
+		color: #FFFFFF;
+		//#ifndef APP-PLUS-NVUE
+		white-space: pre-wrap;  
+		text-overflow:ellipsis;
+		overflow:hidden;
+		//#endif
+	}
+	.cover-view-left{
+		justify-content: flex-end;		
+		bottom: 105upx;
+	}
+	.left-text{
+		width: 540upx;
+		margin-top: 5px;
+		font-size: 15px;
+		color: #FFFFFF;
+	}
+	.cover-view-right{
+		margin-left: 30upx;
+		position: absolute;
+		bottom: 30upx;
+		width: 680upx;
+		flex-direction: row;
+		//#ifndef APP-PLUS-NVUE
+		display: flex;
+		flex-direction: row;
+		//#endif
+		z-index: 9999;
+	}
+	.coverView{
+		flex-direction: row;
+		align-items: center;
+		flex: 1;
+	}
+	.img{
+		height: 60upx;
+		width: 60upx;
+	}
+	.avaterText{
+		color: white;
+		margin-left: 13upx;
+		font-size: 14px;
+	}
+	.shopPrice,.shopName{
+		font-size: 15px;
+		
+	}
+	.shopPrice{
+		padding-left: 10upx;
+		padding-right: 20upx;
+		color: #999;
+	}
+	.shopName{
+		padding-left: 10upx;
+		color: #FFF;
+	}
+	.shopInfo{
+		flex-direction: row;
+		height: 75upx;
+		border-radius: 50%;
+		align-items: center;
+		background-color: rgba(255,255,255,0.2);
+	}
+	.shopIco{
+		width: 75upx;
+		height: 75upx;
+		border-radius: 50%;
+	}
+	.captionsList{
+		height: 62px; 
+		padding:0 10upx;
+		padding-bottom: 5px;
+	}
+	.captions{
+		/* background-color: rgba(255,255,255,0.2); */
+		padding-right: 30upx;
+	}
+	
+	.captions-text{
+		color: #999;
+		padding-top: 5px;
+		font-size: 12px;
+	}
+	.captionsBox{
+		transform: translateY(19px);
+	}
+	.showText{
+		font-size: 13px;
+		color: #FFF;
+	}
+</style>

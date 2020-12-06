@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "详情展示",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "backgroundColor": "#f8f8f8",
+  "titleNView": {
+    "type": "transparent",
+    "titleColor": "black"
+  },
+  "usingComponents": {
+    "share": "/components/share",
+    "uni-number-box": "/components/uni-number-box"
+  }
+}

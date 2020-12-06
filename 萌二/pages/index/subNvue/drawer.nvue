@@ -1,0 +1,176 @@
+<template>
+    <div class="wrapper">
+		<div class="top" @click="hideDrawer()"></div>
+		<div class="buttom">
+			<text class="bottom-title">评论</text>
+			<list class="list">
+				<cell class="bottom-item" v-for="(item,index) in commentList" :key="index">
+					<image :src="item.avatarUri" class="authodHead"></image>
+					<div class="content">
+						<div class="authodInfo">
+							<text class="authodName">{{item.userName}}</text>
+							<text class="Loves">{{item.praiseNum}}</text>
+						</div>
+						<div class="authodCom">
+							<text class="authodComText">{{item.content}}</text>
+							
+							<text class="date">{{item.publishTime}}</text>
+						</div>
+						<div class="feedback">
+							<div class="feedbackItem" v-for="(fItem,fIndex) in item.childCommentVos" :key="fIndex">
+								<text class="strangerName">{{fItem.userName}}：</text>
+								<text class="strangerCom" :style="[{width: 500 - fItem.userName.length *16 +'upx'}]">{{fItem.content}}</text>
+							</div>
+							
+							<text class="getMore">共500条评论</text>
+						</div>
+					</div>
+					
+				</cell>
+				<cell class="symbel"></cell>
+			</list>
+			
+			<input @focus="focus" @blur="blur" :adjust-position="false" :style="[{bottom:InputBottom+'px'}]" class="input" />
+		</div>
+    </div>
+</template>
+
+<script>
+    export default {
+		data() {
+			return {
+				InputBottom:0,
+				commentList : [{
+							_id: "1169951356723724288",
+							height: {},
+							avatarUri: "../../../static/img/tou1.jpg",
+							userName: "白金之星",
+							praiseNum: 1314,
+							content: "我要欧拉欧拉这个男主角",
+							publishTime: '11-11',
+							childCommentVosNum: 0,
+							childCommentVos:[{
+								userName: "Dio",
+								content: "我也想！",
+							},{
+								userName: "蔡徐坤",
+								content: "篮球巨星报告！今天是个装逼的好日子今天是个装逼的好日子今天是个装逼的好日子"
+							}],
+							childCommentVosBtn : "加载更多",
+						},{
+							_id: "1169951356723724288",
+							height: {},
+							avatarUri: "../../../static/img/tou2.jpg",
+							userName: "诚哥",
+							praiseNum: 1314,
+							content: "德国骨科了解一下",
+							publishTime: '11-11',
+							childCommentVosNum: 2,
+							childCommentVos:[{
+								userName: "saber",
+								content: "吃我咖喱棒！",
+							},{
+								userName: "蔡徐坤",
+								content: "篮球巨星报告！"
+							}],
+							childCommentVosBtn : "加载更多",
+						},{
+							_id: "1169951356723724288",
+							height: {},
+							avatarUri: "../../../static/img/tou3.jpg",
+							userName: "炮姐",
+							praiseNum: 1314,
+							content: "困扰的时候即使向神祈祷....也不会有奇迹发生...哭喊着求救...也不会有听到赶来的英雄....",
+							publishTime: '11-11',
+							childCommentVosNum: 2,
+							childCommentVos:[{
+								userName: "蔡旭昆",
+								content: "篮球巨星报告！"
+							},{
+								userName: "妮豆子",
+								content: "我的哥哥呢，哥哥呢，我要找哥哥"
+							}],
+							childCommentVosBtn : "加载更多",
+						},{
+							_id: "1169951356723724288",
+							height: {},
+							avatarUri: "../../../static/img/tou4.jpg",
+							userName: "炎柱",
+							praiseNum: 1314,
+							content: "哪怕同归于尽，我也定将恶鬼斩灭",
+							publishTime: '11-11',
+							childCommentVosNum: 2,
+							childCommentVos:[{
+								userName: "卖炭郎",
+								content: "大哥！牛逼啊！！"
+							}],
+							childCommentVosBtn : "加载更多",
+						}]
+			}
+		},
+		beforeCreate() {},
+		created() {},
+        methods: {
+            hideDrawer() {
+                uni.getCurrentSubNVue().hide('auto')
+            },
+			clickitem(e) {},
+			focus(e){
+				this.InputBottom = e.detail.height
+			},
+			blur(e){
+				this.InputBottom = 0
+			}
+        }
+    }
+</script>
+
+<style scoped>
+	.wrapper {flex-direction: column;flex: 1;text-align: center;background-color: transparent;}
+	.top{background-color: #000;opacity: 0.6;flex: 2;}
+	.buttom{background-color: #fff;flex: 10; border-top-left-radius:10px;border-top-right-radius:10px; }
+	.bottom-title{height: 30px;line-height: 30px; text-align: center;font-size: 14px;color: #888;}
+	.bottom-item{
+		padding: 0px 30upx;
+		padding-top: 20upx;
+		flex-direction: row;
+	}
+	.authodHead{width: 40px;height: 40px;border-radius: 40px;}
+	.content{margin-left: 10upx;flex: 1;}
+	.authodInfo{
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.authodName,
+	.Loves{
+		font-size: 12px;
+		color: #999;
+	}
+	.authodCom{flex-direction:column; color: yellow;margin-top: 10upx;}
+	.authodComText{color: #333;width: 600upx;font-size: 14px;}
+	.date{color: #999;font-size: 10px;padding: 10upx;}
+	.feedback{
+		background-color: #CCE6FF;
+		padding: 20upx;
+	}
+	.feedbackItem{flex-direction: row;margin-bottom: 20upx;}
+	.strangerName,.strangerCom,.strangerDate{font-size: 13px;}
+	.strangerName{color: #999;}
+	.strangerCom{color: #333333;}
+	.strangerDate{margin-left: 10upx;color: #999;}
+	.getMore{
+		font-size: 13px;
+		color: #999;
+		text-align: right;
+	}
+	.input{
+		height: 80upx;
+		width: 750upx;
+		background-color: yellow;
+		position: fixed;
+		bottom: 0;
+	}
+	.symbel{
+		height: 100upx;
+	}
+</style>

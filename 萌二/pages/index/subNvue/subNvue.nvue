@@ -1,0 +1,105 @@
+<template>
+	<view>
+	
+	<view class="tabbar-view">
+		<view class="tabbar-item">
+			<view class="item" @click="postInfo" data-cur="smallVideo">
+				<text class="iconfont icon-like" :class="[dataCur=='smallVideo'?'onclick':'']">&#xe604;</text>
+				<text class="item-text" :class="[dataCur=='smallVideo'?'onclick':'']">商城</text>
+			</view>
+			
+		</view>
+		<view class="tabbar-item">
+			<view class="item" @click="postInfo" data-cur="bases">
+				<text class="iconfont icon-like" :class="[dataCur=='bases'?'onclick':'']">&#xe609;</text>
+				<text class="item-text" :class="[dataCur=='bases'?'onclick':'']">基地</text>
+			</view>
+		</view>
+		<view class="tabbar-item">
+			<view class="item" @click="postInfo" data-cur="more">
+				<text class="iconfont icon-like more" :class="[dataCur=='more'?'onclick':'']">&#xe62c;</text>
+			</view>
+		</view>
+		<view class="tabbar-item">
+			<view class="item" @click="postInfo" data-cur="shop">
+				<text class="iconfont icon-like" :class="[dataCur=='shop'?'onclick':'']">&#xe618;</text>
+				<text class="item-text" :class="[dataCur=='shop'?'onclick':'']">商城</text>
+			</view>
+		</view>
+		<view class="tabbar-item">
+			<view class="item" @click="postInfo" data-cur="myself">
+				<text class="iconfont icon-like" :class="[dataCur=='myself'?'onclick':'']">&#xe617;</text>
+				<text class="item-text" :class="[dataCur=='myself'?'onclick':'']">我的</text>
+			</view>
+		</view>
+	</view>
+	
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+		    return {
+				dataCur: 'smallVideo'
+		    }
+		},
+		created() {
+		    var domModule = weex.requireModule("dom");
+		    domModule.addRule('fontFace', {
+		           'fontFamily': 'iconfont',
+		           'src': "url(\'http://at.alicdn.com/t/font_1212319_kzisuojrp7.ttf')"
+		    })
+		},
+		methods:{
+			postInfo(e){
+				 this.dataCur = e.target.dataset.cur
+				uni.postMessage({dataCur: this.dataCur});
+				
+				//console.log(e)
+			}
+		}
+	}
+</script>
+
+<style>
+.iconfont {
+	font-family: iconfont;
+	color: #666666;
+}
+.icon-like {
+	margin-top: 15px;
+    font-size: 70px;
+	line-height: 55px;
+}
+.tabbar-view{
+	/* 这个位置要注意把主轴调为横向 */
+	flex-direction: row;
+	border-color: #F0F0F0;
+	border-top-width: 1px;
+	
+	
+}
+.tabbar-item{
+	flex: 1;
+	
+}
+.item{
+	align-items:center;
+	
+}
+.item-text {
+	font-size: 25px;
+	color: #666666;
+}	
+
+.more{
+	line-height: 75px;
+
+	font-size: 90px;
+}
+.onclick{
+	color: #007AFF;
+}
+
+</style>

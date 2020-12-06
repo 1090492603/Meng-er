@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "hot-new-card": "/pages/components/hotNewCard",
+    "rec-swiper": "/pages/components/recommedSwiper",
+    "hot-video": "/pages/components/hotVideo"
+  },
+  "component": true
+}

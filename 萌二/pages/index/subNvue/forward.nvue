@@ -1,0 +1,60 @@
+<template>
+    <div class="wrapper">
+		<div class="top" @click="hideDrawer()"></div>
+		<div class="buttom">
+			<div class="li">
+				<text class="bottom-title">私信给</text>
+				<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="0">
+					<view class="scroll-view-item_H uni-bg-red" v-for="(item,index) in tou" :key="index">
+						<image class="view-item_H_image" :src="item.src"></image>
+						<text class="view-item_H_text">{{item.name}}</text>
+					</view>
+				</scroll-view>
+			</div>
+			<div class="li">
+				<text class="bottom-title">分享到</text>
+				<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="0">
+					<view class="scroll-view-item_H uni-bg-red" v-for="(item,index) in fenxiang" :key="index">
+						<image class="view-item_H_image" :src="item.src"></image>
+						<text class="view-item_H_text">{{item.name}}</text>
+					</view>
+				</scroll-view>
+			</div>
+		</div>
+    </div>
+</template>
+
+<script>
+    export default {
+		data() {
+			return {
+				tou:[{src:'../../../static/img/tou1.jpg',name:'李钊'},{src:'../../../static/img/tou2.jpg',name:'杨乐'},{src:'../../../static/img/tou3.jpg',name:'朱芳名'},{src:'../../../static/img/tou4.jpg',name:'周海峰'},{src:'../../../static/img/tou5.jpg',name:'冯友'},{src:'../../../static/img/tou6.jpg',name:'李四'},{src:'../../../static/img/tou7.jpg',name:'你咋'},{src:'../../../static/img/tou8.jpg',name:'李钊'},{src:'../../../static/img/tou9.jpg',name:'李钊'}],
+				fenxiang:[{src:'../../../static/img/fenxiang1.png',name:'微信'},{src:'../../../static/img/fenxiang2.png',name:'朋友圈'},{src:'../../../static/img/fenxiang3.png',name:'QQ'},{src:'../../../static/img/fenxiang4.png',name:'QQ空间'},{src:'../../../static/img/fenxiang5.png',name:'微博'}]
+			}
+		},
+		beforeCreate() {},
+		created() {},
+        methods: {
+            hideDrawer() {
+                uni.getCurrentSubNVue().hide('auto')
+            },
+			scroll(e) {}
+        }
+    }
+</script>
+
+<style scoped>
+	.wrapper {
+		flex-direction: column;
+		flex: 1;
+		text-align: center;
+		background-color: transparent;
+	}
+	.top{background-color: #000;opacity: 0.1;flex: 8;}
+	.buttom{background-color: #fff;flex: 5; border-top-left-radius:10px;border-top-right-radius:10px; }
+	.bottom-title{flex: 1;height: 30px;line-height: 30px; text-align: center;font-size: 14px;font-weight: bold;}
+	.scroll-view_H{flex: 1;flex-direction: row;padding: 10px;}
+	.scroll-view-item_H{padding:5px 10px;text-align: center;}
+	.view-item_H_image{width: 50px;height: 50px;border-radius: 25px;}
+	.view-item_H_text{font-size: 12px;text-align: center;}
+</style>

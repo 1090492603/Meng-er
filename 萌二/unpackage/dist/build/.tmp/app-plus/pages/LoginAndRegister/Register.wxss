@@ -1,0 +1,184 @@
+
+.background{
+	width: 100%;
+	position: fixed;
+	z-index: -1;
+}
+.RegisterView{
+}
+.goBack-text{
+	float: right;
+	margin-right: 30rpx;
+	text-align: 34rpx;
+	color: #666666;
+}
+.title{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	color: #FFFFFF;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.title-Ico,.Register-submit-btn,.GoToRegister,.problem{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.title-Ico{
+	background-color: rgb(121,243,254);
+	width: 120rpx;
+	height: 120rpx;
+	margin-left: 95rpx;
+	font-size: 40rpx;
+	border-radius: 20rpx;
+}
+.title-text{
+	font-size: 50rpx;
+}
+.password,.check-password{
+	margin-top: 20rpx;
+	padding-top: 6%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	color: #333333;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.password-ico{
+	width: 52rpx;
+	height: 52rpx;
+}
+.Register-submit{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	font-size: 35rpx;
+	width: 530rpx;
+	position: absolute;
+	bottom: 30rpx;
+}
+.Register-submit-btn{
+	height: 70rpx;
+	width: 488rpx;
+	background-color: #5AA9E1;
+	font-size: 34rpx;
+	color: #FFF;
+	border-radius: 50rpx;
+}
+.forget{
+	text-align: right;
+	margin-top: 12rpx;
+	margin-right: 5rpx;
+	font-size: 28rpx;
+	color: #de73de;
+}
+.input-box{
+	padding: 0 25rpx;
+	position: relative;
+}
+.input-box-content{
+	background-color: #FFFFFF;
+	padding: 30rpx 85rpx;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	position: relative;
+	border-radius: 20rpx;
+	-webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.1);
+	        box-shadow:0px 1px 2px rgba(0,0,0,0.1);
+}
+.placeholderClass{
+	color: #CCCCCC;
+}
+.GoToRegister{
+	background-color: #F0F0F0;
+	width: 578rpx;
+	height: 62rpx;
+	margin: 0 auto;
+	font-size: 26rpx;
+	color: #999;
+}
+.goto{
+	color: #de73de;
+}
+.itemView{
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	height: 16%;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.inputs{
+	font-size: 28rpx;
+	color: #999;
+	margin-left: 42rpx;
+}
+.getBtn{
+	width: 160rpx;
+	font-size: 28rpx;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	margin-right: 20rpx;
+	color: #32B9D6;
+}
+.phone-input{
+	width: 200rpx;
+	margin-right: 0;
+}
+.phoneView{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.problem{
+	position: absolute;
+	bottom: 46rpx;
+	font-size: 26rpx;
+	color: #32B9D6;
+	width: 700rpx;
+}
+.show{
+	-webkit-animation: show 1s;
+	        animation: show 1s;
+}
+@-webkit-keyframes show{
+from{
+		opacity: 0;
+		top: 40px;
+}
+to{
+		opacity: 1;
+		top: 0;
+}
+}
+@keyframes show{
+from{
+		opacity: 0;
+		top: 40px;
+}
+to{
+		opacity: 1;
+		top: 0;
+}
+}
+

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tag": "/pages/components/Tag",
+    "search-result": "/pages/index/searchResult"
+  }
+}

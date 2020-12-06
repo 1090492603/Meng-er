@@ -1,0 +1,16 @@
+
+.scrollView{
+	background-color: #F1F1F1;
+}
+.card{
+	margin-top: 10px;
+	background-color: #FFFFFF;
+	-webkit-box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	        box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+}
+.scroll_item{
+	margin-top: 10px;
+}
+.input_box{
+}
+

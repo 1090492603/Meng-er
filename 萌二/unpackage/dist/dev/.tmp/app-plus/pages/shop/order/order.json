@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "titleNView": true,
+  "bounce": "none",
+  "usingComponents": {
+    "uni-load-more": "/components/uni-load-more/uni-load-more",
+    "empty": "/components/empty"
+  }
+}

@@ -1,0 +1,22 @@
+
+.cu-tag{
+	font-size: 32rpx;
+	margin: 6px 0;
+	margin-right: 8px;
+	background-color: #eff4ff !important;
+}
+.cu-tag:last-child{
+	margin-bottom: 10px;
+}
+.componentBox{
+	padding: 0 12px;
+}
+.card-text{
+	font-size: 34rpx;
+	margin-left: 10px;
+	color:  #333;
+}
+.card{
+	margin-top: 10px;
+}
+

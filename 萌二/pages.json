@@ -1,0 +1,277 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+			{
+			"path": "pages/LoginAndRegister/Login",
+			"style": {
+				}
+			},
+			{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus":{
+					"subNVues":[
+					{
+						"id": "drawer",
+						"path": "pages/index/subNvue/drawer",
+						"type": "popup",
+						"style": {
+							"height": "100%",
+							"position":"absolute",
+							"bottom":"0",
+							"background":"transparent"
+						}
+					},
+					{
+						"id": "forward",
+						"path": "pages/index/subNvue/forward",
+						"type": "popup",
+						"style": {
+							"height": "100%",
+							"position":"absolute",
+							"bottom":"0",
+							"background":"transparent"
+						}
+					}]
+				}
+			}
+		},
+		{
+			"path":"pages/more/more",
+			"style":{}
+		},
+		{
+			"path":"pages/myself/myself",
+			"style":{}
+		},
+		{
+			"path":"pages/trends/home",
+			"style":{
+					"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path":"pages/trends/InterestCircle",
+			"style":{
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path":"pages/index/search",
+			"style":{}
+		},
+		{
+			"path":"pages/index/searchResult",
+			"style":{}
+		},
+		{
+			"path":"pages/person/person",
+			"style":{}
+		},
+		{
+			"path": "pages/more/tabbar-3-detial/tabbar-3-release/tabbar-3-release",
+			"style": {}
+		},
+		{
+			"path": "pages/more/tabbar-3-detial/tabbar-3-video/tabbar-3-video",
+			"style": {}
+		},
+		{
+			"path": "pages/more/tabbar-3-detial/tabbar-3-qa/tabbar-3-qa",
+			"style": {}
+		},
+		{
+			"path": "pages/LoginAndRegister/Login",
+			"style": {}
+		},
+		{
+			"path": "pages/LoginAndRegister/Register",
+			"style": {}
+		},
+		{
+		    "path" : "pages/shop/home",
+			"style": {
+					"app-plus" : {
+						"bounce" : "none" // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消, 点此查看H5端的取消方法... )
+					},
+					"navigationBarTextStyle": "black",
+					"enablePullDownRefresh": true
+		    }
+		}
+		,{
+			"path": "pages/shop/product/product",
+			"style": {
+				"navigationBarTitleText": "详情展示",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8"
+			},
+			"app-plus": {
+				"titleNView": {
+					"titleColor":"black"
+				}
+			}
+		},
+		{
+			"path": "pages/shop/order/createOrder",
+			"style": {
+				"navigationStyle":"default",
+				"navigationBarTitleText": "创建订单",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8",
+				"app-plus": {
+						"titleNView": true
+				}
+			}
+		},
+		{
+			"path": "pages/shop/money/pay",
+			"style": {
+				"navigationStyle":"default",
+				"navigationBarTitleText": "支付",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8"
+			},
+			"app-plus": {
+					"titleNView": true
+				}
+		},
+		{
+			"path": "pages/shop/money/paySuccess",
+			"style": {
+				"navigationStyle":"default",
+				"navigationBarTitleText": "支付成功",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8"
+			},
+			"app-plus": {
+					"titleNView": true
+				}
+		},
+		{
+			"path": "pages/shop/category/category",
+			"style": {
+				"navigationBarTextStyle":"black",
+				"app-plus": {
+					"titleNView": false ,//禁用原生导航栏
+					"bounce":"none"
+				}
+			}
+		},
+		{
+		    "path" : "pages/shop/product/list",
+		    "style" : {
+				"navigationStyle":"default",
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品列表",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8"
+			}
+		},
+		{
+		    "path": "pages/shop/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"backgroundColor": "#f8f8f8",
+				"navigationStyle":"default"
+			}
+		},
+		{
+			"path": "pages/shop/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"app-plus": {
+						"titleNView": true
+				}
+			}
+		},
+		{
+			"path": "pages/shop/address/addressManage",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"app-plus": {
+						"titleNView": true
+				}
+			}
+		},
+		{
+			"path":"pages/shop/user/user",
+			"style":{
+				"navigationBarTextStyle": "black",
+				"app-plus":{
+					"bounce":"none"
+				}
+			}
+		},
+		{
+		    "path" : "pages/myself/shezhi/shezhi",
+		    "style" : {
+				"navigationBarTextStyle": "black",
+				"app-plus":{
+					"bounce":"none"
+				}
+			}
+		},
+		{
+		    "path" : "pages/shop/order/order",
+			"style": {
+					"navigationBarTitleText": "我的订单",
+					"navigationBarTextStyle": "black",
+					"navigationBarBackgroundColor": "#FFFFFF",
+					"app-plus" : {
+						"titleNView": true,
+						"bounce" : "none" // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消, 点此查看H5端的取消方法... )
+					}
+		    }
+		}
+	],
+	"tabBar": {
+		"borderStyle": "white",
+		"backgroundColor": "#000",
+		"color": "#969696",
+		"selectedColor": "#79F3FE",
+
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/Tabbar/index.png",
+				"selectedIconPath":"static/Tabbar/indexfill.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/trends/home",
+				"iconPath": "static/Tabbar/trends.png",
+				"selectedIconPath":"static/Tabbar/trendfill.png",
+				"text": "动态"
+			},
+			{
+				"pagePath": "pages/more/more",
+				"iconPath": "static/Tabbar/publish.png",
+				"selectedIconPath":"static/Tabbar/publish.png"
+			},
+			{
+				"pagePath": "pages/shop/home",
+				"iconPath": "static/Tabbar/shop.png",
+				"selectedIconPath":"static/Tabbar/shopfill.png",
+				"text": "商城"
+			},
+			{
+				"pagePath": "pages/myself/myself",
+				"iconPath": "static/Tabbar/myself.png",
+				"selectedIconPath":"static/Tabbar/myselffill.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationStyle": "custom"
+	}
+}

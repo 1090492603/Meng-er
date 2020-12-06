@@ -1,0 +1,105 @@
+
+.content{
+	padding: 0 4%;
+}
+.scroll-box{
+	position: absolute;
+	padding-bottom: 10px;
+	width: calc(50% - 10rpx);
+}
+.navigatorBox{
+	position: relative;
+	opacity: 0;
+}
+.showBox{
+	-webkit-animation: show 0.5s;
+	        animation: show 0.5s;
+	-webkit-animation-fill-mode: forwards;
+	        animation-fill-mode: forwards;
+}
+.hideBox{
+	-webkit-animation: hide 1s;
+	        animation: hide 1s;
+	-webkit-animation-fill-mode: forwards;
+	        animation-fill-mode: forwards;
+}
+.scroll-box:nth-child(2n){
+	left: 360rpx;
+}
+.nav{
+	padding: 8px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	height: 40px;
+}
+.nav-item{
+	text-align: center;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	font-weight: 400;
+	padding-bottom: 5px;
+	font-family: 微软雅黑;
+	color: #999;
+	font-size: 1.2em;
+}
+.nav-text{
+	width: 2em;
+}
+.sTitle{
+	font-weight:800;
+	font-size: 1em;
+}
+.img{
+	will-change: transform;
+	border-radius: 5px;
+}
+.ico,.num{
+	color: #999;
+	font-size: 0.8em;
+}
+.ico {
+}
+.num{
+	margin-left: 0.2em;
+}
+.onSelect{
+	border-bottom: 2px solid #000000;
+	color: #000;
+}
+@-webkit-keyframes show{
+from{
+		opacity: 0;
+}
+to{
+		opacity: 1;
+}
+}
+@keyframes show{
+from{
+		opacity: 0;
+}
+to{
+		opacity: 1;
+}
+}
+@-webkit-keyframes hide{
+from{
+		opacity: 1;
+}
+to{
+		opacity: 0;
+}
+}
+@keyframes hide{
+from{
+		opacity: 1;
+}
+to{
+		opacity: 0;
+}
+}
+
